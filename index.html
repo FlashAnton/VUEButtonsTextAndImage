@@ -1,0 +1,62 @@
+<html>
+
+	<head>
+		<title>Моя страница</title>
+	</head>
+
+	<body>
+		<script src="Vue.js"></script>
+		
+		<div id="myVue">
+			<template v-if="txt">
+				<b>{{ tmp }}</b>
+				<button @click="chng" :disabled="dis">
+					<img height="16" src="ret.png"/>
+				</button><br>
+				<button @click="f">{{state}}</button>
+			</template>
+			
+			<template v-else="txt">
+				<button v-on:click="chng">{{ tmp }}</button>
+			</template>
+		</div>
+		
+		<script>
+			var obj = new Vue({
+				el: '#myVue',
+				data: 
+				{
+					tmp: 'Мой текст',
+					txt: false,
+					flg: false,
+					state: 'Заблокировать'
+				},
+				
+				computed:
+				{
+					dis: function()
+					{
+						var vm = this;
+						vm.state = vm.flg ? 'Разблокировать' : 'Заблокировать';
+						return vm.flg;
+					}
+				},
+				
+				methods:
+				{
+					chng: function()
+					{
+						var vm = this;
+						vm.txt = (!vm.txt);
+					},
+					
+					f: function()
+					{
+						var vm = this;
+						vm.flg = (!vm.flg);
+					}
+				}
+			})	
+		</script>
+	</body>
+</html>
